@@ -1,5 +1,3 @@
-package verwaltung;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +10,7 @@ public class PersistenceTest {
         Mitarbeiter m = new Mitarbeiter("Kai", "Herrmann");
         m.addFachgebiet(Fachgebiet.ANALYSE);
         try {
-            Helper.serialize(m);
+            Verwaltung.serialize(m);
         } catch (IOException e) {
             Assertions.fail("Should not have thrown exception!");
         }
@@ -23,8 +21,8 @@ public class PersistenceTest {
         Mitarbeiter m = new Mitarbeiter("Kai", "Herrmann");
         m.addFachgebiet(Fachgebiet.ANALYSE);
         try {
-            Helper.serialize(m);
-            m = Helper.deserialize(m.getId());
+            Verwaltung.serialize(m);
+            m = Verwaltung.deserialize(m.getId());
         } catch (IOException | ClassNotFoundException e) {
             Assertions.fail("Should not have thrown exception!");
         }

@@ -1,19 +1,15 @@
-package verwaltung;
-
-import verwaltung.Mitarbeiter;
-
 import java.io.*;
 
-public class Helper {
+public class Verwaltung {
 
     static String destination = "./serialized";
 
     public static void serialize(Mitarbeiter mitarbeiter) throws IOException {
         File file = new File(destination + "/" + mitarbeiter.getId() + ".txt");
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-        oos.writeObject(mitarbeiter);
-        oos.flush();
-        oos.close();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
+        objectOutputStream.writeObject(mitarbeiter);
+        objectOutputStream.flush();
+        objectOutputStream.close();
     }
 
     public static Mitarbeiter deserialize(int id) throws IOException, ClassNotFoundException {
