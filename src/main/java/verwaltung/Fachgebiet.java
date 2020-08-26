@@ -1,5 +1,5 @@
 package verwaltung;
 
 public enum Fachgebiet {
-    ANALYSE, DESIGN, JAVA, C, TEST
+    ANALYSE, DESIGN, JAVA, C, TEST, PYTHON, CSHARP, CPLUSPLUS, R, RUBY
 }

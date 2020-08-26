@@ -7,23 +7,23 @@ import java.util.Set;
 public class Mitarbeiter implements Serializable {
     static final long serialVersionUID = 458076069326042941L;
     int id;
-    static int idGenerator = 100;
+    int idGenerator = 100;
     String vorname;
     String nachname;
     Set<Fachgebiet> fachgebiete;
 
     public Mitarbeiter(String vorname, String nachname) {
-        if (nachname == null || nachname.length() < 2)
-            throw new IllegalArgumentException("Nachname mit mindestens"
-                    + "zwei Zeichen");
+        if (nachname == null || nachname.length() < 2) {
+            throw new IllegalArgumentException("Nachname mit mindestens zwei Zeichen!");
+        }
         this.vorname = vorname;
         this.nachname = nachname;
         this.id = idGenerator++;
-        fachgebiete = new HashSet<Fachgebiet>();
+        fachgebiete = new HashSet<>();
     }
 
     public Mitarbeiter() { // nur für Serialisierung
-        fachgebiete = new HashSet<Fachgebiet>();
+        fachgebiete = new HashSet<>();
     }
 
     public int getId() {
@@ -59,11 +59,10 @@ public class Mitarbeiter implements Serializable {
     }
 
     public void addFachgebiet(Fachgebiet f) {
-        fachgebiete.add(f);
         if (fachgebiete.size() > 3) {
-            fachgebiete.remove(f);
-            throw new IllegalArgumentException("Maximal 3 Fachgebiete");
+            throw new IllegalArgumentException("Maximal 3 Fachgebiete!");
         }
+        fachgebiete.add(f);
     }
 
     public void removeFachgebiet(Fachgebiet f) {
@@ -81,18 +80,23 @@ public class Mitarbeiter implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || getClass() != obj.getClass())
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
+        }
         Mitarbeiter other = (Mitarbeiter) obj;
         return (id == other.id);
     }
 
     @Override
     public String toString() {
-        StringBuffer erg = new StringBuffer(vorname +
-                " " + nachname + " (" + id + ")[ ");
-        for (Fachgebiet f : fachgebiete)
-            erg.append(f + " ");
+        StringBuilder erg = new StringBuilder(vorname + " " + nachname + " (" + id + ")[ ");
+        for (Fachgebiet f : fachgebiete){
+            if(f.equals(fachgebiete.stream().reduce((a, b) -> b).orElse(null))){
+                erg.append(f);
+                break;
+            }
+            erg.append(f).append(", ");
+        }
         erg.append("]");
         return erg.toString();
     }
