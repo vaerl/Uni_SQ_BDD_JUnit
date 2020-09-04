@@ -1,10 +1,9 @@
 import java.io.IOException;
-import java.util.HashSet;
 
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Mitarbeiter m = new Mitarbeiter("Uwe", "Mey");
+        Mitarbeiter m = new Mitarbeiter("Uwe", "Meyer");
         m.addFachgebiet(Fachgebiet.ANALYSE);
         m.addFachgebiet(Fachgebiet.C);
         System.out.println("Before serialization:");
